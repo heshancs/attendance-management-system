@@ -5,7 +5,7 @@ export const navBar = {
         { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh','yes']},
         { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','yes']},
         { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
-        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','admin','yes']},
+        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudentsInDepartment', access: ['lecturer','mentor','dh','admin','yes']},
         { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
 };
@@ -140,31 +140,39 @@ export const viewAllStudents = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
     { text: 'Name', value: 'name'},
+    { text: 'Attendance Percentage', value: 'attendance_percentage'},
 ],
 students: [
     {
         registration_no: 'SC/2017/10030',
         name: 'Heshan Jayasinghe',
         level: 'Level 3',
-        degree: 'BCS'
+        degree: 'BCS',
+        attendance_percentage:'75'
     },
     {
         registration_no: 'SC/2017/10031',
         name: 'Gimantha Dissanayake',
         level: 'Level 3',
-        degree: 'BCS'
+        degree: 'BCS',
+        attendance_percentage:'85'
+
     },
     {
         registration_no: 'SC/2017/10032',
         name: 'Ramesh Shanilka',
         level: 'Level 2',
-        degree: 'BCS'
+        degree: 'BCS',
+        attendance_percentage:'95'
+
     },
     {
         registration_no: 'SC/2017/10033',
         name: 'Dinuka Heshan',
         level: 'Level 1',
-        degree: 'BSC'
+        degree: 'BSC',
+        attendance_percentage:'80'
+
     },
 ],
 levels: [
@@ -317,6 +325,14 @@ export const viewCourses = {
     { text: 'TYPE', value: 'type'},
     { text: 'ATTENDANCE PERCENTAGE', value:'attendance_percentage'},
 ],
+courses: [
+  {
+      course_code: 'CSC3113',
+      course_title: 'Group Project',
+      attendance_percentage: '79',
+  }
+],
+
 levels: [
   'Level 1', 'Level 2', 'Level 3'
 ],
@@ -331,6 +347,13 @@ headers: [
     { text: 'ATTENDANCE STATUS', value: 'status'},
 ],
 };
+
+export const OneStudentAllCourses = {
+  headers: [
+      { text: 'DATE', align: 'start',  value: 'date'},
+      { text: 'ATTENDANCE STATUS', value: 'status'},
+  ],
+  };
 
 export const viewDetailedCourse = {
   course: {
@@ -430,30 +453,35 @@ courses: [
 export const viewMentorGroups = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-    { text: 'Student Name', value: 'name'},
+    { text: 'Student Name', value: 'student_name'},
+    { text: 'Attendance percentage', value: 'attendance_percentage'},
 ],
-students: [
-    {
-        registration_no: 'SC/2017/10030',
-        name: 'Heshan Jayasinghe',
-        level: 'Level 3',
-    },
-    {
-        registration_no: 'SC/2017/10031',
-        name: 'Gimantha Dissanayake',
-        level: 'Level 3',
-    },
-    {
-        registration_no: 'SC/2017/10032',
-        name: 'Ramesh Shanilka',
-        level: 'Level 2',
-    },
-    {
-        registration_no: 'SC/2017/10033',
-        name: 'Dinuka Heshan',
-        level: 'Level 1',
-    },
-],
+// students: [
+//     {
+//         registration_no: 'SC/2017/10030',
+//         name: 'Heshan Jayasinghe',
+//         level: 'Level 3',
+//         percentage:'75'
+//     },
+//     {
+//         registration_no: 'SC/2017/10031',
+//         name: 'Gimantha Dissanayake',
+//         level: 'Level 3',
+//         percentage:'80'
+//     },
+//     {
+//         registration_no: 'SC/2017/10032',
+//         name: 'Ramesh Shanilka',
+//         level: 'Level 2',
+//         percentage:'85'
+//     },
+//     {
+//         registration_no: 'SC/2017/10033',
+//         name: 'Dinuka Heshan',
+//         level: 'Level 1',
+//         percentage:'95'
+//     },
+//],
 levels: [
   'Level 1', 'Level 2', 'Level 3'
 ],
@@ -521,7 +549,7 @@ headers: [
 ],
 courses: [
     {
-        course_code: 'CSC1124',
+        course_code: 'CSC1124', 
         course_name: 'Internet programming',
         attendance_percentage: 50
     },
@@ -548,3 +576,39 @@ courses: [
 ]
 }
 
+export const MentorsStudent = {
+  headers: [
+    { text: 'Registration Number', align: 'start',  value: 'registration_no'},
+    { text: 'Student Name', value: 'name'},
+    { text: 'Attendance Percentage', value: 'percentage'},
+],
+students: [
+    {
+        registration_no: 'SC/2017/10030',
+        name: 'Heshan Jayasinghe',
+        percentage: '80',
+        level: 'Level 3',
+    },
+    {
+        registration_no: 'SC/2017/10031',
+        name: 'Gimantha Dissanayake',
+        percentage: '85',
+        level: 'Level 3',
+    },
+    {
+        registration_no: 'SC/2017/10032',
+        name: 'Ramesh Shanilka',
+        percentage: '70',
+        level: 'Level 2',
+    },
+    {
+        registration_no: 'SC/2017/10033',
+        name: 'Dinuka Heshan',
+        percentage: '85',
+        level: 'Level 1',
+    },
+],
+levels: [
+  'Level 1', 'Level 2', 'Level 3'
+],
+};

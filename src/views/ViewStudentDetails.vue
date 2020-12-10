@@ -4,7 +4,7 @@
 
       <v-card class="mx-4 mb-4 text-body-2">
           <v-container>
-            <v-row>
+             <v-row align="center" justify="center">
                 <v-col cols="6" sm="4" md="4">
                     <v-row>
                         <v-col cols="7" sm="5" md="5">
@@ -26,7 +26,7 @@
                     </v-row>                    
                 </v-col>
             </v-row>
-            <v-row>
+             <v-row align="center" justify="center">
                 <v-col cols="6" sm="4" md="4">
                     <v-row>
                         <v-col cols="7" sm="5" md="5">
@@ -48,7 +48,7 @@
                     </v-row>                    
                 </v-col>
             </v-row>
-            <v-row>
+             <v-row align="center" justify="center">
                 <v-col cols="6" sm="4" md="4">
                     <v-row>
                         <v-col cols="7" sm="5" md="5">
@@ -68,6 +68,7 @@
                         <v-data-table
                         :headers="headers"
                         :items="courses"
+                        v-on:click:row="selectCourse"
                         :items-per-page="5" >
                            
                             
@@ -131,7 +132,19 @@ export default {
             if(attendance_percentage < 80) return 'red'
             else if(attendance_percentage > 80) return 'green'
             else return 'orange'
-        }
+        },
+        selectCourse(course){
+        // this.setCourse({
+        //   co_id: course.co_id,
+        //   type: course.type,
+        //   course_code: course.course_code,
+        //   course_title: course.course_title,
+        //   level: course.level,
+        //   semester: course.semester,
+        //   percentage: course.attendance_percentage
+        // }); 
+          this.$router.push("/OneStudentAllCourses");
+      }
     }
 }
 </script>

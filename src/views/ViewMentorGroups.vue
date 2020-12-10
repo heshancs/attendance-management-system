@@ -42,36 +42,69 @@
       </v-card-title>
 
       <v-data-table
+        loading="isLoading"
         :headers="headers"
         :items="filteredStudents"
         :items-per-page="10"
         :search="searchReg || searchName"
+        v-on:click:row="selectStudent"
         class="elevation-1">
+        <template v-slot:item.attendance_percentage="{ item }">
+          <v-chip
+            :color="getColor(item.attendance_percentage)"
+            dark>
+                {{ item.attendance_percentage }}
+          </v-chip>
+        </template>
       </v-data-table>
     </v-card>    
   </v-container>
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters, mapMutations } from "vuex";
 import { viewMentorGroups } from "../data/data";
   export default {
     data () {
       return {
+        isLoading: true,
         searchReg: '',
         searchName: '',
-        filteredStudents: null,
+        filteredStudents: [],
+        students:[],
+        courses:[],
         selectedLevel: '',
         headers: viewMentorGroups.headers,
-        students: viewMentorGroups.students,
+       // students: viewMentorGroups.students,
         levels: viewMentorGroups.levels,
        
       }
     },
     methods: {
+       ...mapMutations(["setStudent"]),   
+      ...mapGetters(["getToken", "getUser"]),
+       getColor(percentage){
+            if(percentage < 80) return 'red'
+            else if(percentage > 80) return 'green'
+            else return 'orange'
+        },
+        async getStudents() {
+        const token = this.getToken();
+        const user = this.getUser();        
+
+          const mentor_id = user.username;
+          const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/mentor/",{
+            mentor_id,
+          });
+          console.log(result);
+          this.students = result.data.students;
+      
+      },
       filterLevels(selected) {
         if(selected!=null){
           this.selectedLevel = selected;
-          this.filteredStudents = this.students.filter(student => student.level === selected)
+          this.filteredStudents = this.students.filter(student => students.level === selected)
         }        
       },
       resetStudents(){
@@ -79,11 +112,26 @@ import { viewMentorGroups } from "../data/data";
         this.filteredStudents = this.students
       },
       resetDisplayed(){
-        this.filteredStudents = this.students.filter(student => student.level === this.selectedLevel)
+        this.filteredStudents = this.students.filter(students => students.level === this.selectedLevel)
+      },
+      selectStudent(student){
+         this.setStudent({
+           registration_no: student.registration_no,
+           student_name: student.student_name
+         });
+          this.$router.push("/extraCourses");
       }
     },
-    beforeMount(){
-      this.resetStudents()
+    async mounted(){
+      try {
+        //this.getStudents();
+        this.getStudents().then(() => {
+        this.resetStudents();
+        this.isLoading = false;
+        });
+      } catch(err) {
+        console.log(err.toString());
+      }
     }
   }
 </script>

@@ -22,7 +22,12 @@ export const store = new Vuex.Store({
             level: null,
             semester: null,
             percentage: null
+        },
+        student: {
+            registration_no: null,
+            student_name: null
         }
+        
     },
     getters: {
         getToken: state => {
@@ -33,6 +38,9 @@ export const store = new Vuex.Store({
         },
         getCourse: state => {
             return state.course;
+        },
+        getStudent: state => {
+            return state.student;
         },
         getMahapola: state => {
             return state.mahapola;
@@ -47,6 +55,9 @@ export const store = new Vuex.Store({
         },
         setCourse: (state, payload) => {
             state.course = payload;
+        },
+        setStudent: (state, payload) => {
+            state.student = payload;
         },
         setMahapola: (state,payload) => {
             state.mahapola = payload;

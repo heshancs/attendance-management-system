@@ -52,7 +52,7 @@
                             </template>
                             <template v-slot:item.alert="{ item }">
                                 <v-btn
-                                    :color="red"
+                                    :color="black"
                                 >
                                     {{ item.alert }}
                                 </v-btn>

@@ -71,6 +71,7 @@ import { viewCourses } from "../data/data";
         search: '',
         filteredCourses: [],
         courses: [],
+        student:[],
         selectedLevel: '',
         headers:viewCourses.headers,
         levels:viewCourses.levels,
@@ -79,7 +80,7 @@ import { viewCourses } from "../data/data";
     },
     methods: {
       ...mapMutations(["setCourse"]),   
-      ...mapGetters(["getToken", "getUser"]),
+      ...mapGetters(["getToken", "getUser","getStudent"]),
       getColor(percentage){
         if(percentage > 80) return 'green'
         else if(percentage == 80) return 'orange'
@@ -88,21 +89,13 @@ import { viewCourses } from "../data/data";
       async getCourses() {
         const token = this.getToken();
         const user = this.getUser();        
-        if(user.role === "student"){
-          const registration_no = user.username;
+      
+          const registration_no = "SC/2017/10271";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
           });
           //console.log(result.data);
           this.courses = result.data.courses;
-        } else {
-          const lecturer_id = user.username;
-          const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
-            lecturer_id,
-          });
-          //console.log(result.data);
-          this.courses = result.data.courses;
-        }
       },
       filterLevels(selected) {
         if(selected!=null) {
@@ -131,10 +124,7 @@ import { viewCourses } from "../data/data";
           semester: course.semester,
           percentage: course.attendance_percentage
         });
-        if(this.getUser().role === "student")
-          this.$router.push("/viewDetailedAttendance");
-        else  
-          this.$router.push("/viewDetailedCourse");
+          this.$router.push("/OneStudentAllCourses");
       }
     },
     async mounted(){

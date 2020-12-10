@@ -17,7 +17,12 @@ import ViewStudentDetails from './views/ViewStudentDetails.vue'
 import ViewAttendanceSheet from './views/ViewAttendanceSheet.vue'
 import SendAlert from './views/SendAlert.vue'
 import ViewAllStudents from './views/ViewAllStudents.vue'
-
+import MentorsStudent from './views/MentorsStudent.vue'
+import viewAllCourseAttendence from './views/viewAllCourseAttendence.vue'
+import viewAllCoursesWithAttendence from './views/viewAllCoursesWithAttendence.vue'
+import extraCourses from './views/extraCourses.vue'
+import OneStudentAllCourses from './views/OneStudentAllCourses.vue'
+import viewAllStudentsInDepartment from './views/viewAllStudentsInDepartment'
 
 
 Vue.use(Router)
@@ -111,5 +116,36 @@ export default new Router({
       name: 'viewallstudents',
       component: ViewAllStudents
     },
+    {
+      path: '/MentorsStudent',
+      name: 'mentorsstudent',
+      component: MentorsStudent
+    },
+    {
+      path: '/viewAllCourseAttendence',
+      name: 'viewallcourseattendence',
+      component: viewAllCourseAttendence
+    },
+    {
+      path: '/viewAllCoursesWithAttendence',
+      name: 'viewallcourseswithattendence',
+      component: viewAllCoursesWithAttendence
+    },
+    {
+      path: '/extraCourses',
+      name: 'extracourses',
+      component: extraCourses
+    },
+    {
+      path: '/OneStudentAllCourses',
+      name: 'onestudentallcourses',
+      component: OneStudentAllCourses
+    },
+    {
+      path: '/viewAllStudentsInDepartment',
+      name: 'viewallstudentsindepartment',
+      component: viewAllStudentsInDepartment
+    }
+    
   ]
 })
